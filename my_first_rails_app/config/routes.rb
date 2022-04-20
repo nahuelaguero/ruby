@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
-  root 'cars#index'
-  resources :cars
+  root 'pages#home'
+  get 'about', to: 'pages#about'
+  resources :articles, only: [:show]
 end

@@ -1,0 +1,7 @@
+{
+  "ruby.rubocop.executePath": "",
+  "ruby.rubocop.configFilePath": "C://Users//Nahuel//Documents//Mentormate Devcamp 2022//ruby//my_first_rails_app//.rubocop.yml",
+
+  // default true
+  "ruby.rubocop.onSave": true
+}
