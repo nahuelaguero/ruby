@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  projects_db:
+    container_name: projects_db
+    image: mysql:5.7.26
+    networks:
+      - projects-network
+    restart: on-failure
+    env_file:
+      - ./docker/.env
+    ports:
+      - "${MYSQL_PORT}:3306"
+    volumes:
+      - ./docker/mysql/conf:/etc/mysql/conf.d:delegated
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+      - projects_db_data:/var/lib/mysql
+
+  projects_app:
+    container_name: projects_app
+    build:
+      context: .
+      target: dev
+      args:
+        APP_USER_ID: "${APP_USER_ID}"
+        APP_GROUP_ID: "${APP_GROUP_ID}"
+    networks:
+      - projects-network
+    env_file:
+      - ./docker/.env
+    ports:
+      - "${APP_PORT}:3000"
+      - "${APP_DEBUG_PORT}:1234"
+      - "3035:3035"
+    restart: on-failure
+    command: ./docker/ruby/docker-entrypoint.sh
+    depends_on:
+      - projects_db
+    volumes:
+      - .:/opt/app:delegated
+      - ./node_modules:/opt/app/node_modules
+    stdin_open: true
+    tty: true
+
+volumes:
+  projects_db_data:
+  projects_node_modules:
+
+networks:
+  projects-network:
