@@ -1,4 +1,4 @@
-FROM ruby:2.7.4-alpine3.13 AS base
+FROM ruby:3.1.2-alpine3.14 AS base
 
 ENV APP_PATH /opt/app
 ENV APP_GROUP app
@@ -35,7 +35,7 @@ RUN apk update \
     ttf-droid \
     ttf-freefont \
     ttf-liberation \
-    ttf-ubuntu-font-family \
+    # ttf-ubuntu-font-family \
 	su-exec \
     curl \
   && apk add --update --no-cache --virtual .build-deps
@@ -59,7 +59,7 @@ COPY --chown=${APP_USER}:${APP_GROUP} ./Gemfile* ./
 COPY --chown=${APP_USER}:${APP_GROUP} yarn.lock .
 COPY --chown=${APP_USER}:${APP_GROUP} package.json .
 
-RUN gem install bundler --version=2.1.4
+RUN gem install bundler --version=2.3.12
 
 # Development stage
 FROM base AS dev

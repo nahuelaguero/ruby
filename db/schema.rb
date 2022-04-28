@@ -12,26 +12,26 @@
 
 ActiveRecord::Schema.define(version: 2022_04_27_044703) do
 
-  create_table "budgets", force: :cascade do |t|
+  create_table "budgets", charset: "utf8", force: :cascade do |t|
     t.integer "amount"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "departments", force: :cascade do |t|
+  create_table "departments", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "offices", force: :cascade do |t|
+  create_table "offices", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "organizations", force: :cascade do |t|
+  create_table "organizations", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.integer "department"
     t.integer "office"
@@ -41,14 +41,14 @@ ActiveRecord::Schema.define(version: 2022_04_27_044703) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "people", force: :cascade do |t|
+  create_table "people", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "last_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "projects", force: :cascade do |t|
+  create_table "projects", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.integer "organization"
     t.string "status"
