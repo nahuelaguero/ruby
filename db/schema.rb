@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_27_044703) do
+ActiveRecord::Schema.define(version: 2022_04_28_144702) do
 
   create_table "budgets", charset: "utf8", force: :cascade do |t|
     t.integer "amount"
@@ -57,6 +57,13 @@ ActiveRecord::Schema.define(version: 2022_04_27_044703) do
     t.text "description"
     t.date "start_date"
     t.date "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "supervisors", charset: "utf8", force: :cascade do |t|
+    t.integer "people_id"
+    t.integer "organization_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

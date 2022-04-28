@@ -5,7 +5,7 @@ class CreateProjects < ActiveRecord::Migration[6.1]
       t.integer :organization
       t.string :status
       t.integer :supervisor
-      t.string :people
+      t.integer :people
       t.text :description
       t.date :start_date
       t.date :end_date
