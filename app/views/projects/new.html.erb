@@ -1,0 +1,41 @@
+<h1>Create a New Project</h1>
+
+<%= form_with scope: :project, url: projects_path, local:true do |f| %>
+  <p>
+    <%= f.label :name %><br/>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :organization %><br/>
+    <%= f.number_field :organization %>
+  </p>
+  <p>
+    <%= f.label :status %><br/>
+    <%= f.text_field :status %>
+  </p>
+  <p>
+    <%= f.label :supervisor %><br/>
+    <%= f.number_field :supervisor %>
+  </p>
+  <p>
+    <%= f.label :people %><br/>
+    <%= f.text_field :people %>
+  </p>
+  <p>
+    <%= f.label :description %><br/>
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :start_date %><br/>
+    <%= f.date_field :start_date %>
+  </p>
+  <p>
+    <%= f.label :end_date %><br/>
+    <%= f.date_field :end_date %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+ 
+<%= end %>
