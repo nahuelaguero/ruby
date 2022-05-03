@@ -34,7 +34,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def destroy 
+  def destroy
     @project.destroy
     redirect_to projects_path
   end
@@ -48,10 +48,13 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(
       :name,
-      :organization,
+      :organization_id,
+      :budget_id,
+      :department_ids[],
+      :office_ids[],
       :status,
       :supervisor,
-      :people,
+      :person_id,
       :description,
       :start_date,
       :end_date

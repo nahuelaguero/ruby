@@ -1,9 +1,14 @@
 <h1>Showing project details</h1>
 
 <p><strong>Name: <%= @project.name %></strong></p>
-<p><strong>Organization: <%= @project.organization %></strong></p>
 <p><strong>Status: <%= @project.status %></strong></p>
-<p><strong>Supervisor: <%= @project.supervisor %></strong></p>
-<p><strong>People: <%= @project.people %></strong></p>
+<p><strong>Organization: <%= @project.organization.name if @project.organization_id %> </strong></p>
+<p><strong>Supervisor: <%= @project.person.name if @project.person_id %></strong></p>
+<p><strong>Budget: <%= @project.budget.amount if @project.budget_id %></strong></p>
+<%= if @project.departments.any? %>
+  <%= render @project.departments %>
+<%= end %>
+<p><strong>Department: <%= @project.department.name if @project.department_id %></strong></p>
+
 <p><strong>Start Date: <%= @project.start_date %></strong></p>
 <p><strong>End Date: <%= @project.end_date %></strong></p>

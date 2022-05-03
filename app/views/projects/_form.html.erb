@@ -5,20 +5,28 @@
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :organization %><br/>
-    <%= f.number_field :organization %>
-  </p>
-  <p>
     <%= f.label :status %><br/>
     <%= f.text_field :status %>
   </p>
   <p>
-    <%= f.label :supervisor %><br/>
-    <%= f.number_field :supervisor %>
+    <%= f.label :organization %><br/>
+    <%= f.collection_select( :organization_id, Organization.all, :id, :name) %>
   </p>
   <p>
-    <%= f.label :people %><br/>
-    <%= f.text_field :people %>
+    <%= f.label :supervisor %><br/>
+    <%= f.collection_select( :person_id, Person.all, :id, :name ) %>
+  </p>
+  <p>
+    <%= f.label :budget %><br/>
+    <%= f.collection_select( :budget_id, Budget.all, :id, :amount) %>
+  </p>
+  <p>
+    <%= f.label :department %><br/>
+    <%= f.collection_select( :department_id, Department.all, :id, :name) %>
+  </p>
+  <p>
+    <%= f.label :office %><br/>
+    <%= f.collection_select( :office_id, Office.all, :id, :name) %>
   </p>
   <p>
     <%= f.label :description %><br/>

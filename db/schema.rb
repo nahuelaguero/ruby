@@ -10,62 +10,87 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_28_144702) do
+ActiveRecord::Schema.define(version: 2022_05_03_064327) do
 
   create_table "budgets", charset: "utf8", force: :cascade do |t|
-    t.integer "amount"
+    t.float "amount"
+    t.bigint "organization_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_budgets_on_organization_id"
   end
 
   create_table "departments", charset: "utf8", force: :cascade do |t|
     t.string "name"
+    t.bigint "organization_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_departments_on_organization_id"
+  end
+
+  create_table "departments_projects", charset: "utf8", force: :cascade do |t|
+    t.bigint "department_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_id"], name: "index_departments_projects_on_department_id"
+    t.index ["project_id"], name: "index_departments_projects_on_project_id"
   end
 
   create_table "offices", charset: "utf8", force: :cascade do |t|
     t.string "name"
-    t.string "address"
+    t.bigint "organization_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_offices_on_organization_id"
+  end
+
+  create_table "offices_projects", charset: "utf8", force: :cascade do |t|
+    t.bigint "office_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["office_id"], name: "index_offices_projects_on_office_id"
+    t.index ["project_id"], name: "index_offices_projects_on_project_id"
   end
 
   create_table "organizations", charset: "utf8", force: :cascade do |t|
     t.string "name"
-    t.integer "department"
-    t.integer "office"
-    t.integer "budget"
-    t.integer "people"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "people", charset: "utf8", force: :cascade do |t|
+  create_table "persons", charset: "utf8", force: :cascade do |t|
     t.string "name"
     t.string "last_name"
+    t.boolean "is_supervisor"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "projects", charset: "utf8", force: :cascade do |t|
     t.string "name"
-    t.integer "organization"
+    t.bigint "organization_id"
     t.string "status"
-    t.integer "supervisor"
-    t.string "people"
-    t.text "description"
+    t.bigint "budget_id"
+    t.bigint "department_id"
+    t.bigint "office_id"
+    t.string "description"
     t.date "start_date"
     t.date "end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "person_id"
+    t.index ["budget_id"], name: "index_projects_on_budget_id"
+    t.index ["department_id"], name: "index_projects_on_department_id"
+    t.index ["office_id"], name: "index_projects_on_office_id"
+    t.index ["organization_id"], name: "index_projects_on_organization_id"
+    t.index ["person_id"], name: "index_projects_on_person_id"
   end
 
-  create_table "supervisors", charset: "utf8", force: :cascade do |t|
-    t.integer "people_id"
-    t.integer "organization_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
+  add_foreign_key "departments_projects", "departments"
+  add_foreign_key "departments_projects", "projects"
+  add_foreign_key "offices_projects", "offices"
+  add_foreign_key "offices_projects", "projects"
+  add_foreign_key "projects", "persons"
 end

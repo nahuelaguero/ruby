@@ -1,0 +1,18 @@
+
+<%= form_with(model: @budget, local: true) do |f| %>
+  <p>
+    <%= f.label :amount %><br/>
+    <%= f.number_field :amount %>
+  </p>
+  <p>
+  <p>
+    <%= f.label :organization %><br/>
+    <%= f.collection_select( :organization_id, Organization.all, :id, :name, include_blank: true) %>
+  </p>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+ 
+<% end %>

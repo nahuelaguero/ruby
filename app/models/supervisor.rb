@@ -1,3 +1,0 @@
-class Supervisor < ApplicationRecord
-
-end
