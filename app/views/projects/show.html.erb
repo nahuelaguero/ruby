@@ -5,10 +5,11 @@
 <p><strong>Organization: <%= @project.organization.name if @project.organization_id %> </strong></p>
 <p><strong>Supervisor: <%= @project.person.name if @project.person_id %></strong></p>
 <p><strong>Budget: <%= @project.budget.amount if @project.budget_id %></strong></p>
-<%= if @project.departments.any? %>
-  <%= render @project.departments %>
-<%= end %>
-<p><strong>Department: <%= @project.department.name if @project.department_id %></strong></p>
+<% if @project.departments.any? %>
+  <% @project.departments.each do |department|%>
+    <p><strong>Department: <%= department.name %></strong></p>
+  <% end %>
+<% end %>
 
 <p><strong>Start Date: <%= @project.start_date %></strong></p>
 <p><strong>End Date: <%= @project.end_date %></strong></p>

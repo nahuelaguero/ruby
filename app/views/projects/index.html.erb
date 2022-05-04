@@ -24,7 +24,11 @@
         <td><%= project.status %></td> 
         <td><%= project.organization.name if project.organization_id %></td>
         <td><%= project.person.name if project.person_id %></td>
-        <td><%= project.departments.name %></td>
+        <% if project.departments.any? %>
+          <% project.departments.each do |department|%>
+          <td><%= department.name %></td>
+          <% end %>
+        <% end %>
         <td><%= project.offices.name %></td>
         <td><%= project.budget.amount if project.budget_id %></td>
         <td><%= project.description %></td>
